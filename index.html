@@ -7,28 +7,28 @@
 <style>
   /* ==========================
      ESTILOS GENERALES (UI)
-     Todo en un solo archivo, sin dependencias externas.
-     Dirigido a niños de 8-9 años: colores claros, botones grandes, texto legible.
      ========================== */
   :root{
-    --bg:#0e1220;             /* Fondo nocturno para resaltar proyectiles */
-    --panel:#12182c;          /* Paneles */
-    --accent:#00bcd4;         /* Azul cian para acentos */
-    --good:#35d07f;           /* Verde éxito */
-    --warn:#ffb300;           /* Amarillo advertencia */
-    --danger:#ff5252;         /* Rojo peligro */
-    --text:#e9f0ff;           /* Texto principal */
+    --bg:#0e1220;
+    --panel:#12182c;
+    --accent:#00bcd4;
+    --good:#2e7d32;           /* Verde más oscuro para contraste */
+    --good-btn:#35d07f;       /* Verde brillante para botones */
+    --warn:#ff8f00;           /* Naranja */
+    --danger:#d32f2f;         /* Rojo */
+    --danger-btn:#ff5252;     /* Rojo brillante */
+    --text:#e9f0ff;
     --muted:#a9b3d1;
-    --shield:#7c4dff;         /* Color de escudo base */
-    --shield2:#00e5ff;        /* Skin 2 */
-    --shield3:#ff4081;        /* Skin 3 */
+    --shield:#7c4dff;
+    --shield2:#00e5ff;
+    --shield3:#ff4081;
     --radius:16px;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0; background:linear-gradient(180deg,#0b1022 0%, #0c1230 60%, #0e152f 100%);
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, sans-serif;
     color:var(--text);
     display:flex; flex-direction:column; gap:8px;
   }
@@ -48,6 +48,8 @@
   }
   .btn:active{ transform: translateY(1px) }
   .btn.primary{ background: linear-gradient(180deg,#1e3f73,#102a52); box-shadow:0 0 0 1px #3a67b8 inset }
+  
+  /* Botones de acción con colores distintivos */
   .btn.good{ background: linear-gradient(180deg,#0e6b45,#0a4b31); box-shadow:0 0 0 1px #1dc77b inset }
   .btn.warn{ background: linear-gradient(180deg,#a06a0a,#6e4807); box-shadow:0 0 0 1px #ffc045 inset }
   .btn.danger{ background: linear-gradient(180deg,#7a1034,#4e0a22); box-shadow:0 0 0 1px #ff6a8f inset }
@@ -59,17 +61,16 @@
   }
   .panel{ background:var(--panel); border:1px solid #1b2242; border-radius:var(--radius); padding:10px; }
 
-  /* Panel izquierdo: Briefing/Tutorial */
+  /* Panel izquierdo */
   #briefing{ display:flex; flex-direction:column; gap:8px }
   #briefing h2{ margin:0 0 4px 0; font-size:18px }
   #briefing .card{ background:#111836; border:1px solid #1c2753; border-radius:12px; padding:10px }
   #briefing .tip{ font-size:13px; color:var(--muted) }
   #voiceToggle{ margin-left:6px }
 
-  /* Panel central: Juego (Canvas) */
+  /* Panel central */
   #gameWrap{ position:relative; overflow:hidden; }
   #gameCanvas{ width:100%; height:420px; background: radial-gradient(120% 100% at 50% 100%, #0a1030 0%, #0c143c 40%, #0d1746 80%); border-radius:12px; display:block; }
-  /* HUD sobre el canvas */
   #hud{ position:absolute; inset:8px; display:flex; align-items:flex-start; justify-content:space-between; pointer-events:none }
   #waveBadge{ background:#12193b; border:1px solid #223077; border-radius:10px; padding:6px 8px; font-size:12px; opacity:.95 }
   #statusText{ font-size:13px; color:var(--muted) }
@@ -77,13 +78,13 @@
   #centerMsg .big{ font-size:28px }
   #centerMsg .mid{ font-size:16px; color:var(--muted) }
 
-  /* Panel derecho: Escudo de la Calma + Personalización */
+  /* Panel derecho */
   #shieldPanel{ display:flex; flex-direction:column; gap:10px }
   .shieldBar{
     background:#0f1638; border:1px solid #1b2553; border-radius:12px; padding:10px;
   }
   .barWrap{ background:#0c1430; border-radius:10px; height:18px; overflow:hidden; border:1px solid #1a244f }
-  .barFill{ height:100%; background:linear-gradient(90deg,var(--good), #8bf0c0); width:100%; transition:width .25s ease }
+  .barFill{ height:100%; background:linear-gradient(90deg,var(--good-btn), #8bf0c0); width:100%; transition:width .25s ease }
   .shieldIcon{ font-size:28px }
   .skinGrid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:8px }
   .skin{
@@ -101,7 +102,6 @@
   #defenses .btn{ flex:1; font-size:18px; display:flex; align-items:center; justify-content:center; gap:8px; padding:14px }
   #defenses kbd{ background:#0c1331; border:1px solid #2a376c; padding:2px 6px; border-radius:6px; font-size:12px; color:#a9b3d1 }
 
-  /* Diálogos y modales */
   dialog{ border:none; border-radius:16px; background:#0f1533; color:var(--text); width:min(720px, 92vw); padding:14px 16px; }
   dialog::backdrop{ background:rgba(7,10,24,.6) }
   .modalHeader{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px }
@@ -109,11 +109,8 @@
   .modalBody{ display:grid; gap:10px }
   .modalFooter{ display:flex; justify-content:flex-end; gap:8px; margin-top:6px }
   .list{ margin:0; padding-left:18px }
-
-  /* Accesibilidad de foco */
   :focus-visible{ outline:2px solid #64b5f6; outline-offset:2px }
 
-  /* Pequeñas adaptaciones responsive */
   @media (max-width: 980px){
     main{ grid-template-columns: 1fr; }
     #gameCanvas{ height: 360px }
@@ -127,7 +124,7 @@
       <span class="badge">3° Primaria · Offline</span>
     </div>
     <div class="controls">
-      <button id="btnTutorial" class="btn">📘 Tutorial</button>
+      <button id="btnTutorial" class="btn">📘 Ayuda</button>
       <button id="btnReiniciar" class="btn">🔄 Reiniciar</button>
       <label class="btn small" title="Activar/Desactivar narración">
         🔊 Voz
@@ -141,16 +138,16 @@
     <section id="briefing" class="panel">
       <h2>👨‍🏫 Maestro de la Serenidad</h2>
       <div class="card">
-        <p style="margin-top:0">Recuerda tus tres defensas:</p>
+        <p style="margin-top:0">Guía rápida de iconos:</p>
         <ul class="list">
-          <li><b>Ignorar 💨</b>: Para burlas menores. No responderlas las hace desaparecer.</li>
-          <li><b>Bloquear 🛡️</b>: Para <i>acoso persistente</i>. Corta la comunicación.</li>
-          <li><b>Avisar 🚨</b>: Para <i>amenazas o solicitudes peligrosas</i>. Pide ayuda a un adulto.</li>
+          <li style="color:#69f0ae">Si ves <b>💨</b> → Pulsa <b>Ignorar</b></li>
+          <li style="color:#ffd740">Si ves <b>🛡️</b> → Pulsa <b>Bloquear</b></li>
+          <li style="color:#ff8a80">Si ves <b>🚨</b> → Pulsa <b>Avisar</b></li>
         </ul>
         <p class="tip">Usa el teclado: <kbd>1</kbd> Ignorar, <kbd>2</kbd> Bloquear, <kbd>3</kbd> Avisar.</p>
       </div>
       <div class="card">
-        <b>Modo extra</b>: <i>Avalancha Infinita</i> — velocidad creciente y puntuación.
+        <b>Modo extra</b>: <i>Avalancha Infinita</i>
         <div style="margin-top:8px; display:flex; gap:8px">
           <button id="btnAvalancha" class="btn primary">🌪️ Iniciar Avalancha</button>
           <button id="btnPausa" class="btn">⏸️ Pausa</button>
@@ -210,24 +207,35 @@
       <button class="btn small" onclick="this.closest('dialog').close()">✖</button>
     </div>
     <div class="modalBody">
-      <p>El Maestro de la Serenidad dice:</p>
-      <ul class="list">
-        <li><b>Ignorar 💨</b>: Para <b>burlas simples</b> (p.ej., “Tu avatar es feo”).</li>
-        <li><b>Bloquear 🛡️</b>: Para <b>acoso persistente</b> (insultos repetidos).</li>
-        <li><b>Avisar 🚨</b>: Para <b>amenazas</b> o <b>solicitudes sospechosas</b> (datos, fotos, contraseñas).</li>
-      </ul>
-      <p>Defiende tu calma: usa los botones o el teclado (<kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd>).</p>
+      <p>El Maestro de la Serenidad dice: "Mira el icono del mensaje que cae y usa la defensa igual".</p>
+      <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:8px; text-align:center;">
+        <div style="background:#0e6b45; padding:10px; border-radius:8px;">
+            <div style="font-size:24px;">💨</div>
+            <div style="font-size:12px; margin-top:4px;">Si ves Viento</div>
+            <div style="font-weight:bold; color:#8bf0c0">IGNORAR</div>
+        </div>
+        <div style="background:#a06a0a; padding:10px; border-radius:8px;">
+            <div style="font-size:24px;">🛡️</div>
+            <div style="font-size:12px; margin-top:4px;">Si ves Escudo</div>
+            <div style="font-weight:bold; color:#ffe082">BLOQUEAR</div>
+        </div>
+        <div style="background:#7a1034; padding:10px; border-radius:8px;">
+            <div style="font-size:24px;">🚨</div>
+            <div style="font-size:12px; margin-top:4px;">Si ves Alarma</div>
+            <div style="font-weight:bold; color:#ff8a80">AVISAR</div>
+        </div>
+      </div>
       <details>
-        <summary><b>Oleadas</b></summary>
+        <summary style="margin-top:10px; cursor:pointer"><b>Más detalles sobre las amenazas</b></summary>
         <ol class="list">
-          <li><b>Principiante</b>: Burlas simples y lentas. Respuesta: <b>Ignorar</b>.</li>
-          <li><b>Intermedio</b>: Aparece un acosador persistente. Respuesta: <b>Bloquear</b> (e ignorar burlas simples).</li>
-          <li><b>Avanzado</b>: Amenazas y solicitudes peligrosas. Respuesta: <b>Avisar</b> (y aplicar las otras cuando correspondan).</li>
+          <li><b>Burlas (💨)</b>: "Tu avatar es feo". Son leves. Ignóralas.</li>
+          <li><b>Acoso (🛡️)</b>: Mensajes repetidos muchas veces. Bloquéalos.</li>
+          <li><b>Peligro (🚨)</b>: Piden fotos, datos o amenazan. Avisa al adulto.</li>
         </ol>
       </details>
     </div>
     <div class="modalFooter">
-      <button class="btn primary" onclick="this.closest('dialog').close(); window.startGame()">¡Comenzar!</button>
+      <button class="btn primary" onclick="this.closest('dialog').close(); window.startGame()">¡Entendido!</button>
     </div>
   </dialog>
 
@@ -245,27 +253,6 @@
   </dialog>
 
 <script>
-/* =============================================================
-   EL GUARDIÁN DEL ESCUDO DIGITAL — Juego de una sola página
-   HTML+CSS+JS en un único archivo. Sin dependencias. Offline.
-
-   Mecánica principal:
-   - Proyectiles (mensajes) caen desde arriba hacia el avatar.
-   - El jugador reacciona con una de tres defensas: Ignorar, Bloquear, Avisar.
-   - Cada tipo de proyectil exige una defensa específica.
-   - 3 Oleadas guiadas (tutorializado) + Modo infinito.
-
-   Accesibilidad:
-   - Botones grandes y atajos (1,2,3)
-   - Mensajes por voz (speechSynthesis) con interruptor.
-   - Texto claro y métrica final.
-
-   Audio:
-   - Sonidos simples generados con WebAudio (sin ficheros externos).
-   - Líneas de voz en español reproducidas con speechSynthesis.
-
-   Autor: Diseñado para uso educativo.
-   ============================================================= */
 (() => {
   // ---------------------- Utilidades generales ----------------------
   const $ = (sel, el=document) => el.querySelector(sel);
@@ -278,72 +265,34 @@
   const canvas = document.getElementById('gameCanvas');
   const ctx = canvas.getContext('2d');
   function fitCanvasToCSS() {
-    // Ajusta el tamaño interno al tamaño visible para nitidez
     const rect = canvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
     canvas.width = Math.floor(rect.width * dpr);
     canvas.height = Math.floor(rect.height * dpr);
-    ctx.setTransform(dpr,0,0,dpr,0,0); // Escala lógica
+    ctx.setTransform(dpr,0,0,dpr,0,0);
   }
   fitCanvasToCSS();
   window.addEventListener('resize', fitCanvasToCSS);
 
   // ---------------------- Estado del juego ----------------------
   const State = {
-    running: false,
-    paused: false,
-    mode: 'campaign', // 'campaign' | 'infinite'
-    wave: 0,
-    hp: 100,
-    shieldSkin: 'base',
+    running: false, paused: false, mode: 'campaign',
+    wave: 0, hp: 100, shieldSkin: 'base',
     unlocks: { ice:false, rose:false },
-    score: 0,
-    metrics: { ignored:0, blocked:0, reported:0, mistakes:0 },
-    projectiles: [],
-    spawnTimer: 0,
-    bullyActive: false, // indica si hay acoso persistente en curso
-    elapsed: 0
+    score: 0, metrics: { ignored:0, blocked:0, reported:0, mistakes:0 },
+    projectiles: [], spawnTimer: 0, bullyActive: false, elapsed: 0
   };
 
-  // Mensajes por tipo
   const MSG = {
-    TAUNT: [
-      'Tu avatar es feo', 'Qué lento eres', 'Jaja, qué mal juegas', 'No puedes ganar', 'Pfff, aburrido'
-    ],
-    BULLY_LOOP: [
-      'Perdedor', 'Perdedor...', 'Te gané siempre', 'Nadie te quiere', 'Siempre pierdes'
-    ],
-    DANGER: [
-      'Mándame una foto tuya', 'Dame tu contraseña para proteger tu cuenta', 'Te encontraré en la escuela', 'Pásame tu dirección', 'Mándame tu número'
-    ]
+    TAUNT: ['Tu avatar es feo', 'Qué lento eres', 'Jaja, mal jugador', 'No ganarás', 'Aburrido...'],
+    BULLY_LOOP: ['Perdedor', 'Perdedor...', 'Te gané', 'Nadie te quiere', 'Siempre pierdes'],
+    DANGER: ['Mándame una foto', 'Dame tu contraseña', 'Te espero afuera', 'Dime tu dirección', 'Envíame tu teléfono']
   };
 
-  // Parámetros de oleadas (campaña)
   const WAVES = [
-    // Oleada 1 – solo burlas simples
-    {
-      name:'Principiante',
-      duration: 22000,
-      spawnEvery: 1400,
-      speed: 85,
-      types: ['taunt']
-    },
-    // Oleada 2 – taunts + bully persistente
-    {
-      name:'Intermedio',
-      duration: 26000,
-      spawnEvery: 1200,
-      speed: 105,
-      types: ['taunt','bully']
-    },
-    // Oleada 3 – incluye peligros
-    {
-      name:'Avanzado',
-      duration: 30000,
-      spawnEvery: 1100,
-      speed: 125,
-      types: ['taunt','bully','danger']
-    }
+    { name:'Principiante', duration: 22000, spawnEvery: 1500, speed: 80, types: ['taunt'] },
+    { name:'Intermedio', duration: 26000, spawnEvery: 1300, speed: 100, types: ['taunt','bully'] },
+    { name:'Avanzado', duration: 30000, spawnEvery: 1100, speed: 120, types: ['taunt','bully','danger'] }
   ];
 
   // ---------------------- UI elementos ----------------------
@@ -355,81 +304,64 @@
   const metricsDiv = document.getElementById('metrics');
   const skinGrid = document.getElementById('skinGrid');
 
-  // ---------------------- Audio: WebAudio + Voz ----------------------
+  // ---------------------- Audio ----------------------
   const AC = new (window.AudioContext || window.webkitAudioContext)();
   const voiceEnabled = () => document.getElementById('voiceToggle').checked;
 
   function speak(text){
     if(!voiceEnabled()) return;
-    // Usa speechSynthesis nativo; parametrización simple.
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'es-MX';
-    u.rate = 1; u.pitch = 1.05; u.volume = 1;
-    speechSynthesis.cancel(); // evitar cola larga
+    u.lang = 'es-MX'; u.rate = 1; u.pitch = 1.05;
+    speechSynthesis.cancel();
     speechSynthesis.speak(u);
   }
 
-  // Sonidos básicos sintetizados
   function beep(freq=440, time=0.15, type='sine', gain=0.03){
     const o=AC.createOscillator(); const g=AC.createGain();
     o.type=type; o.frequency.value=freq; g.gain.value=gain;
     o.connect(g).connect(AC.destination);
     o.start(); o.stop(AC.currentTime+time);
   }
-  function wind(){ // Ignorar correcto: ruido de viento suave
+  function wind(){ 
     const noise = AC.createBufferSource();
     const buffer = AC.createBuffer(1, AC.sampleRate*0.25, AC.sampleRate);
     const data = buffer.getChannelData(0);
-    for(let i=0;i<data.length;i++) data[i] = (Math.random()*2-1) * (1-i/data.length); // fade-out
+    for(let i=0;i<data.length;i++) data[i] = (Math.random()*2-1) * (1-i/data.length);
     noise.buffer = buffer;
     const filt = AC.createBiquadFilter(); filt.type='highpass'; filt.frequency.value=600;
     const g=AC.createGain(); g.gain.value=0.04;
     noise.connect(filt).connect(g).connect(AC.destination);
     noise.start();
   }
-  function wall(){ // Bloqueo: golpe grave + chispa
-    beep(110,0.12,'square',0.05); setTimeout(()=>beep(220,0.08,'sawtooth',0.03),60);
-  }
-  function reinforcements(){ // Avisar: mini fanfarria
-    [523,659,784].forEach((f,i)=>setTimeout(()=>beep(f,0.12,'triangle',0.05), i*120));
-  }
-  function impact(){ // Error
-    beep(98,0.2,'sawtooth',0.05);
-  }
+  function wall(){ beep(110,0.12,'square',0.05); setTimeout(()=>beep(220,0.08,'sawtooth',0.03),60); }
+  function reinforcements(){ [523,659,784].forEach((f,i)=>setTimeout(()=>beep(f,0.12,'triangle',0.05), i*120)); }
+  function impact(){ beep(98,0.2,'sawtooth',0.05); }
 
   // ---------------------- Entidades ----------------------
   const PLAYER = { x:0, y:0, r:34 };
-
   function resetPlayerPos(){
-    const w = canvas.clientWidth; const h = canvas.clientHeight;
+    const w = canvas.clientWidth, h = canvas.clientHeight;
     PLAYER.x = w/2; PLAYER.y = h*0.76; PLAYER.r = Math.max(28, Math.min(40, Math.min(w,h)*0.04));
   }
   resetPlayerPos();
 
-  // Projectile factory
   function makeProjectile(kind){
     const w = canvas.clientWidth; const startX = rand(40, w-40);
     const speed = (State.mode==='infinite')? (120 + State.elapsed*0.02) : WAVES[State.wave-1].speed;
-    const radius = kind==='danger'? 26 : (kind==='bully'? 20 : 16);
+    const radius = kind==='danger'? 28 : (kind==='bully'? 24 : 20); // Tamaños ajustados
     let text = '';
     if(kind==='taunt') text = choice(MSG.TAUNT);
     else if(kind==='bully'){ text = choice(MSG.BULLY_LOOP); State.bullyActive = true; }
     else if(kind==='danger') text = choice(MSG.DANGER);
     return {
       id: Math.random().toString(36).slice(2),
-      kind, text,
-      x: startX, y: -30,
-      vy: speed/60,
-      r: radius,
-      alive: true,
-      from: (kind==='bully'? 'acosador' : 'fuente')
+      kind, text, x: startX, y: -30, vy: speed/60, r: radius, alive: true
     };
   }
 
-  // ---------------------- Dibujo ----------------------
+  // ---------------------- Dibujo (Mejorado) ----------------------
   function drawShieldBase(){
     const {x,y,r} = PLAYER;
-    // Aura según skin
     ctx.save();
     let grad = ctx.createRadialGradient(x,y,r*0.2, x,y,r*1.25);
     const skin = State.shieldSkin;
@@ -438,81 +370,92 @@
     else { grad.addColorStop(0,'rgba(124,77,255,0.55)'); grad.addColorStop(1,'rgba(43,45,127,0)'); }
     ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(x,y,r*1.4,0,Math.PI*2); ctx.fill();
 
-    // Disco del escudo
     ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2);
     ctx.fillStyle = skin==='ice'? '#00e5ff33' : (skin==='rose'? '#ff408133' : '#7c4dff33');
     ctx.fill();
     ctx.strokeStyle = skin==='ice'? '#9be8ff' : (skin==='rose'? '#ffc4d8' : '#c9bdff');
     ctx.stroke();
 
-    // Ícono central meditativo
-    ctx.fillStyle = '#e9f0ff';
-    ctx.font = `${Math.round(r*0.9)}px serif`;
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText('🧘', x, y);
+    ctx.fillStyle = '#e9f0ff'; ctx.font = `${Math.round(r*0.9)}px serif`;
+    ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('🧘', x, y);
     ctx.restore();
   }
 
   function drawProjectile(p){
-    const icon = p.kind==='danger' ? '⚠️' : (p.kind==='bully' ? '❗' : '💬');
-    const color = p.kind==='danger'? '#ff5252' : (p.kind==='bully' ? '#ff6f00' : '#9ca7c9');
+    // === MEJORA VISUAL SOLICITADA ===
+    // Asignamos el Emoji de la acción requerida y el color del botón correspondiente
+    // para que la asociación sea instantánea.
+    let icon = '';
+    let color = '';
+
+    if(p.kind === 'danger') {
+        icon = '🚨'; // Acción: AVISAR
+        color = '#d32f2f'; // Rojo
+    } else if(p.kind === 'bully') {
+        icon = '🛡️'; // Acción: BLOQUEAR
+        color = '#ff8f00'; // Naranja/Amarillo
+    } else { // taunt
+        icon = '💨'; // Acción: IGNORAR
+        color = '#2e7d32'; // Verde
+    }
+
     ctx.save();
-    // burbuja / proyectil
+    // Burbuja
     ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-    ctx.fillStyle = color; ctx.globalAlpha = 0.85; ctx.fill();
-    ctx.globalAlpha = 1; ctx.lineWidth=2; ctx.strokeStyle = '#1b2242'; ctx.stroke();
-    // icono
-    ctx.font = `${Math.round(p.r*0.9)}px serif`;
+    ctx.fillStyle = color; ctx.globalAlpha = 0.9; ctx.fill();
+    ctx.globalAlpha = 1; ctx.lineWidth=2; ctx.strokeStyle = '#fff'; ctx.stroke();
+    
+    // Icono (El Emoji de Acción)
+    ctx.font = `${Math.round(p.r*1.1)}px serif`; // Emoji grande y claro
     ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.shadowColor="rgba(0,0,0,0.5)"; ctx.shadowBlur=4; // Sombra para legibilidad
     ctx.fillStyle = '#fff';
-    ctx.fillText(icon, p.x, p.y-2);
-    // texto pequeño
-    ctx.font = '12px system-ui'; ctx.fillStyle = '#0b1022';
+    ctx.fillText(icon, p.x, p.y + 2);
+    ctx.shadowBlur=0;
+    
+    // Texto del mensaje (debajo de la burbuja)
+    ctx.font = '12px system-ui'; ctx.fillStyle = '#b0bec5';
     const tw = ctx.measureText(p.text).width;
-    if(tw < p.r*2.2){ ctx.fillText(p.text, p.x, p.y+p.r+12); }
+    // Solo mostramos el texto si no está muy cerca del borde inferior o si es relevante
+    if(p.y < canvas.height - 40 && tw < 180){ 
+      // Fondo semitransparente para el texto para leerlo mejor sobre el fondo oscuro
+      ctx.fillStyle = 'rgba(0,0,0,0.6)';
+      ctx.fillRect(p.x - tw/2 -4, p.y + p.r + 2, tw + 8, 16);
+      ctx.fillStyle = '#fff';
+      ctx.fillText(p.text, p.x, p.y+p.r+14); 
+    }
     ctx.restore();
   }
 
   function draw(){
     const w = canvas.clientWidth, h = canvas.clientHeight;
     ctx.clearRect(0,0,w,h);
-
-    // Línea de ataque superior decorativa
-    ctx.save();
-    ctx.strokeStyle = '#24306b'; ctx.setLineDash([6,6]); ctx.beginPath();
+    // Línea de spawn
+    ctx.save(); ctx.strokeStyle = '#24306b'; ctx.setLineDash([6,6]); ctx.beginPath();
     ctx.moveTo(8, 36); ctx.lineTo(w-8, 36); ctx.stroke(); ctx.restore();
 
-    // Jugador
     drawShieldBase();
-
-    // Proyectiles
     State.projectiles.forEach(drawProjectile);
   }
 
-  // ---------------------- Lógica / física simple ----------------------
+  // ---------------------- Lógica ----------------------
   function update(dt){
     if(!State.running || State.paused) return;
     State.elapsed += dt;
 
-    // Spawning
     State.spawnTimer -= dt*1000;
     if(State.spawnTimer <= 0){
       if(State.mode==='campaign'){
         const cfg = WAVES[State.wave-1];
         const type = choice(cfg.types);
-        // En intermedio y avanzado, el bully aparece como ráfaga a veces
         if(type==='bully' && !State.bullyActive && Math.random()<0.6){
-          // Dispara una pequeña ráfaga de 3-4 insultos
           const n = 3 + (Math.random()*2|0);
-          for(let i=0;i<n;i++){
-            setTimeout(()=>State.projectiles.push(makeProjectile('bully')), i*220);
-          }
+          for(let i=0;i<n;i++) setTimeout(()=>State.projectiles.push(makeProjectile('bully')), i*220);
         } else {
           State.projectiles.push(makeProjectile(type));
         }
         State.spawnTimer = cfg.spawnEvery * rand(0.8,1.25);
       } else {
-        // Infinito: probabilidad según tiempo
         const r = Math.random();
         const type = r<0.6 ? 'taunt' : (r<0.85 ? 'bully' : 'danger');
         State.projectiles.push(makeProjectile(type));
@@ -520,32 +463,24 @@
       }
     }
 
-    // Mover proyectiles
     const w = canvas.clientWidth, h = canvas.clientHeight;
     State.projectiles.forEach(p=>{ p.y += p.vy; });
 
-    // Colisión con jugador (si llega al escudo sin respuesta => daño)
     for(const p of State.projectiles){
       if(!p.alive) continue;
       const dx = p.x-PLAYER.x, dy = p.y-PLAYER.y, dist = Math.hypot(dx,dy);
-      if(dist < p.r + PLAYER.r*0.7){ // margen
-        // Impacto no manejado: daño
+      if(dist < p.r + PLAYER.r*0.7){ 
         p.alive = false;
-        applyDamage(18);
-        impact();
-        speak('¡Tu calma recibió un golpe! ¡Recuerda tus defensas!');
-        flashCenter('¡Ayyy! Escudo golpeado', 'Usa la defensa correcta', '#ff7676');
+        applyDamage(18); impact();
+        speak('¡Tu calma recibió un golpe! ¡Recuerda el icono!');
+        flashCenter('¡Ayyy! Te golpearon', 'Mira el icono del mensaje', '#ff7676');
       }
     }
-
-    // Limpiar muertos o fuera de pantalla
     State.projectiles = State.projectiles.filter(p=>p.alive && p.y < h+40);
 
-    // Reglas de oleada (fin por tiempo)
     if(State.mode==='campaign'){
       const cfg = WAVES[State.wave-1];
       if(State.elapsed*1000 >= cfg.duration){
-        // Si no hay proyectiles pendientes, avanza de oleada
         if(State.projectiles.length===0){ nextWave(); }
       }
     }
@@ -556,32 +491,25 @@
     updateHPUI();
     if(State.hp<=0) return endGame(false);
   }
-
-  function updateHPUI(){
-    hpBar.style.width = `${State.hp}%`;
-    hpLabel.textContent = `${Math.round(State.hp)}%`;
-  }
-
+  function updateHPUI(){ hpBar.style.width = `${State.hp}%`; hpLabel.textContent = `${Math.round(State.hp)}%`; }
+  
   function flashCenter(title, subtitle='', color='#cfe3ff'){
     centerMsg.innerHTML = `<div class="big" style="color:${color}">${title}</div>` + (subtitle?`<div class="mid">${subtitle}</div>`:'');
     centerMsg.style.opacity = '1';
     centerMsg.animate([{opacity:1},{opacity:0}],{duration:1400, easing:'ease', fill:'forwards'});
   }
-
   function updateMetricsUI(){
     metricsDiv.innerHTML = `💨 Ignoradas: <b>${State.metrics.ignored}</b> · 🛡️ Bloqueados: <b>${State.metrics.blocked}</b> · 🚨 Avisos: <b>${State.metrics.reported}</b> · ❌ Errores: <b>${State.metrics.mistakes}</b><br/>Puntuación: <b>${Math.round(State.score)}</b>`;
   }
 
-  // ---------------------- Controles del jugador ----------------------
   function handleDefense(kind){
     if(!State.running || State.paused) return;
-    // Encuentra el proyectil más cercano al jugador (objetivo prioritario)
     let target = null, bestD=1e9;
     for(const p of State.projectiles){
       const d = Math.hypot(p.x-PLAYER.x, p.y-PLAYER.y);
       if(d < bestD){ bestD=d; target=p; }
     }
-    if(!target) return; // nada que procesar
+    if(!target) return; 
 
     function correctActionFor(p){
       if(p.kind==='taunt') return 'ignorar';
@@ -593,49 +521,38 @@
     const wasCorrect = (kind===correct);
 
     if(wasCorrect){
-      // Elimina (y reglas especiales para bully)
       target.alive=false;
       if(target.kind==='bully'){
-        // Si hay varias en ráfaga, bloquear limpia cercanas del mismo tipo
         const removed = State.projectiles.filter(p=>p.kind==='bully' && p.alive && Math.abs(p.x-target.x)<60);
         removed.forEach(p=>p.alive=false);
         State.bullyActive = false;
       }
-      // Feedback por tipo
-      if(kind==='ignorar'){ wind(); speak('¡Energía conservada! ¡Esa burla no te afectó!'); State.metrics.ignored++; State.score+=25; flashCenter('✔️ Ignorado', '¡Calma intacta!', '#7ee0b0'); }
-      else if(kind==='bloquear'){ wall(); speak('¡Paz restaurada! ¡Tú controlas tu espacio!'); State.metrics.blocked++; State.score+=40; flashCenter('🛡️ Bloqueado', 'Acoso detenido', '#ffd467'); }
-      else { reinforcements(); speak('¡La decisión más valiente! ¡Has protegido a todos!'); State.metrics.reported++; State.score+=60; flashCenter('🚨 Aviso enviado', 'Adultos en camino', '#ffaaaa'); }
+      if(kind==='ignorar'){ wind(); speak('¡Bien hecho! Esa burla no importa.'); State.metrics.ignored++; State.score+=25; flashCenter('💨 Ignorado', '¡Excelente!', '#7ee0b0'); }
+      else if(kind==='bloquear'){ wall(); speak('¡Bloqueado! Tú mandas.'); State.metrics.blocked++; State.score+=40; flashCenter('🛡️ Bloqueado', 'Adiós acosador', '#ffd467'); }
+      else { reinforcements(); speak('¡Avisaste! Muy valiente.'); State.metrics.reported++; State.score+=60; flashCenter('🚨 Aviso enviado', 'Ayuda en camino', '#ffaaaa'); }
     } else {
-      // Error => daño
-      applyDamage(18);
-      impact(); State.metrics.mistakes++; State.score=Math.max(0,State.score-10);
-      speak('¡Tu calma recibió un golpe! ¡Recuerda tus defensas!');
-      flashCenter('❌ Defensa incorrecta', 'Piensa cuál corresponde', '#ffa07a');
+      applyDamage(18); impact(); State.metrics.mistakes++; State.score=Math.max(0,State.score-10);
+      speak('¡Esa no era la defensa correcta!');
+      flashCenter('❌ Error', 'Mira el icono del mensaje', '#ffa07a');
     }
     updateMetricsUI();
   }
 
-  // ---------------------- Flujo de oleadas / modos ----------------------
   function startCampaign(){
-    State.mode='campaign';
-    State.wave=1; State.elapsed=0; State.spawnTimer=400; State.projectiles=[]; State.hp=100; State.score=0; State.metrics={ignored:0,blocked:0,reported:0,mistakes:0}; State.bullyActive=false;
-    updateHPUI();
-    waveNo.textContent = '1';
-    statusText.textContent = `Nivel ${WAVES[0].name}`;
+    State.mode='campaign'; State.wave=1; State.elapsed=0; State.spawnTimer=400; State.projectiles=[]; State.hp=100; State.score=0; State.metrics={ignored:0,blocked:0,reported:0,mistakes:0}; State.bullyActive=false;
+    updateHPUI(); waveNo.textContent = '1'; statusText.textContent = `Nivel ${WAVES[0].name}`;
     State.running = true; State.paused=false;
-    flashCenter('Oleada 1: Principiante', 'Responde con 💨 Ignorar');
+    flashCenter('Nivel 1: Principiante', '¡Busca el icono 💨!');
   }
 
   function nextWave(){
     if(State.wave>=3) return endGame(true);
     State.wave++; State.elapsed=0; State.spawnTimer=400; State.projectiles=[]; State.bullyActive=false;
-    waveNo.textContent = String(State.wave);
-    statusText.textContent = `Nivel ${WAVES[State.wave-1].name}`;
-    flashCenter(`Oleada ${State.wave}: ${WAVES[State.wave-1].name}`, State.wave===2?'Aparece un acosador — usa 🛡️ Bloquear':'Amenazas y solicitudes — usa 🚨 Avisar');
-
-    // Desbloqueos de skins
-    if(State.wave===2){ unlockSkin('ice'); }
-    if(State.wave===3){ unlockSkin('rose'); }
+    waveNo.textContent = String(State.wave); statusText.textContent = `Nivel ${WAVES[State.wave-1].name}`;
+    const hint = State.wave===2 ? 'Aparece 🛡️ Bloquear' : 'Aparece 🚨 Avisar';
+    flashCenter(`Nivel ${State.wave}`, hint);
+    if(State.wave===2) unlockSkin('ice');
+    if(State.wave===3) unlockSkin('rose');
   }
 
   function endGame(victory){
@@ -643,87 +560,57 @@
     const end = document.getElementById('endModal');
     const title = document.getElementById('endTitle');
     const body = document.getElementById('endBody');
-
     if(victory){
       title.textContent = '🏆 ¡Victoria!';
-      const msg = `¡Misión Cumplida! Ignoraste <b>${State.metrics.ignored}</b> burlas, bloqueaste <b>${State.metrics.blocked}</b> acosadores y avisaste ante <b>${State.metrics.reported}</b> amenazas graves. ¡Dominas la auto‑protección digital!`;
-      body.innerHTML = `${msg}<br><br>El Maestro te nombra: <b>Guardián de la Serenidad</b>.`;
-      speak('¡Gran trabajo! Has protegido tu calma y la de todos.');
+      body.innerHTML = `¡Fantástico! Has dominado las defensas. Ignoraste ${State.metrics.ignored}, bloqueaste ${State.metrics.blocked} y avisaste ${State.metrics.reported} veces.`;
+      speak('¡Felicidades Guardián! Has ganado.');
     } else {
-      title.textContent = '💡 Aprendizaje';
-      body.innerHTML = `Tu escudo se rompió esta vez. Hablemos con el Maestro para aprender: recuerda <b>Ignorar</b> burlas, <b>Bloquear</b> el acoso y <b>Avisar</b> ante peligros. ¡Inténtalo de nuevo!`;
-      speak('Respira. Aprendimos algo nuevo. Inténtalo otra vez con calma.');
+      title.textContent = '¡Inténtalo de nuevo!';
+      body.innerHTML = `Recuerda: Si ves 💨 usa Ignorar. Si ves 🛡️ usa Bloquear. Si ves 🚨 usa Avisar.`;
+      speak('No te rindas. Inténtalo otra vez mirando los iconos.');
     }
-    // Resumen métrico rápido
-    body.innerHTML += `<hr style="border-color:#223077"/><div><b>Resumen</b>: 💨 ${State.metrics.ignored} · 🛡️ ${State.metrics.blocked} · 🚨 ${State.metrics.reported} · ❌ ${State.metrics.mistakes}</div>`;
-
-    updateMetricsUI();
-    end.showModal();
+    updateMetricsUI(); end.showModal();
   }
 
   function startInfinite(){
     State.mode='infinite'; State.wave=0; State.elapsed=0; State.spawnTimer=400; State.projectiles=[]; State.hp=100; State.score=0; State.metrics={ignored:0,blocked:0,reported:0,mistakes:0}; State.bullyActive=false;
-    updateHPUI(); waveNo.textContent='∞'; statusText.textContent='Avalancha Infinita';
-    State.running=true; State.paused=false; flashCenter('🌪️ Avalancha Infinita', 'Velocidad creciente');
+    updateHPUI(); waveNo.textContent='∞'; statusText.textContent='Avalancha';
+    State.running=true; State.paused=false; flashCenter('🌪️ Avalancha', '¡Resiste!');
   }
 
-  // ---------------------- Skins ----------------------
-  function unlockSkin(key){
-    State.unlocks[key]=true;
-    const el = $(`.skin[data-skin="${key}"]`);
-    if(el){ el.classList.remove('locked'); el.title='Desbloqueado'; }
-  }
-  function applySkin(key){
-    if(key!=='base' && !State.unlocks[key]) return; // no aplicar si no está desbloqueada
-    State.shieldSkin = key;
-    flashCenter('🎨 Nuevo escudo','¡Listo!', '#cfe3ff');
-  }
+  function unlockSkin(key){ State.unlocks[key]=true; const el = $(`.skin[data-skin="${key}"]`); if(el){ el.classList.remove('locked'); el.title='Desbloqueado'; } }
+  skinGrid.addEventListener('click', (e)=>{ const card = e.target.closest('.skin'); if(card && (card.dataset.skin==='base'||State.unlocks[card.dataset.skin])) applySkin(card.dataset.skin); });
+  function applySkin(key){ State.shieldSkin = key; flashCenter('🎨 Escudo equipado'); }
 
-  skinGrid.addEventListener('click', (e)=>{
-    const card = e.target.closest('.skin'); if(!card) return;
-    const key = card.getAttribute('data-skin');
-    applySkin(key);
-  });
-
-  // ---------------------- Bucle de animación ----------------------
   let last = performance.now();
   function loop(now){
     const dt = (now-last)/1000; last = now;
     if(State.running && !State.paused){ update(dt); }
-    draw();
-    requestAnimationFrame(loop);
+    draw(); requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
 
-  // ---------------------- Entrada / Interacción ----------------------
   window.addEventListener('keydown',(e)=>{
     if(e.repeat) return;
     if(e.key==='1') handleDefense('ignorar');
-    else if(e.key==='2') handleDefense('bloquear');
-    else if(e.key==='3') handleDefense('avisar');
+    if(e.key==='2') handleDefense('bloquear');
+    if(e.key==='3') handleDefense('avisar');
   });
   document.getElementById('btnIgnorar').addEventListener('click',()=>handleDefense('ignorar'));
   document.getElementById('btnBloquear').addEventListener('click',()=>handleDefense('bloquear'));
   document.getElementById('btnAvisar').addEventListener('click',()=>handleDefense('avisar'));
-
-  // Botones header / briefing
   document.getElementById('btnAvalancha').addEventListener('click', startInfinite);
-  document.getElementById('btnPausa').addEventListener('click', ()=>{ State.paused=!State.paused; flashCenter(State.paused?'⏸️ Pausa':'▶️ Reanudar'); });
-  document.getElementById('btnReiniciar').addEventListener('click', ()=>{ (State.mode==='infinite')? startInfinite() : startCampaign(); });
+  document.getElementById('btnPausa').addEventListener('click', ()=>{ State.paused=!State.paused; flashCenter(State.paused?'⏸️ Pausa':'▶️ Juego'); });
+  document.getElementById('btnReiniciar').addEventListener('click', ()=>{ State.mode==='infinite'?startInfinite():startCampaign() });
   document.getElementById('btnTutorial').addEventListener('click', ()=>$('#tutorial').showModal());
-
-  // ---------------------- API pública para botones del modal ----------------------
   window.startGame = () => startCampaign();
-
-  // Mostrar tutorial al entrar y primera línea de voz
-  window.addEventListener('load',()=>{
-    $('#tutorial').showModal();
-    speak('Bienvenido. Usa Ignorar para burlas, Bloquear para acoso y Avisar para peligros. ¡Tú controlas tu calma!');
+  
+  // Mensaje inicial más claro
+  window.addEventListener('load',()=>{ 
+    $('#tutorial').showModal(); 
+    speak('Bienvenido. Mira los iconos de los mensajes que caen y pulsa el botón igual.'); 
   });
-
-  // Mantener avatar centrado
   const ro = new ResizeObserver(()=>{ resetPlayerPos(); }); ro.observe(canvas);
-
 })();
 </script>
 </body>
